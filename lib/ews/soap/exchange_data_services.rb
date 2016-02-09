@@ -713,7 +713,7 @@ module Viewpoint::EWS::SOAP
         }
         end
       end
-      do_soap_request(req)
+      do_soap_request(req, response_class: EwsResponse)
     end
 
     # Resolve ambiguous e-mail addresses and display names
