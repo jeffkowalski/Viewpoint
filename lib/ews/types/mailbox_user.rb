@@ -26,9 +26,12 @@ module Viewpoint::EWS::Types
     include Viewpoint::EWS::Types
 
     MAILBOX_KEY_PATHS = {
-      name: [:name],
-      email_address: [:email_address],
+      name:           [:name],
+      email_address:  [:email_address],
+      routing_type:   [:routing_type],
+      mailbox_type:   [:mailbox_type]
     }
+
     MAILBOX_KEY_TYPES = {}
     MAILBOX_KEY_ALIAS = {
       email: :email_address,
