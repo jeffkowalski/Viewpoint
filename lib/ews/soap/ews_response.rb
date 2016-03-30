@@ -32,11 +32,11 @@ module Viewpoint::EWS::SOAP
     end
 
     def header
-      envelope[0][:header][:elems]
+      envelope.find{|e| e.keys.include? :header}[:header][:elems]
     end
 
     def body
-      envelope[1][:body][:elems]
+      envelope.find{|e| e.keys.include? :body}[:body][:elems]
     end
 
     def response
