@@ -110,8 +110,11 @@ class Viewpoint::EWS::Connection
     when 200
       resp.body
     when 302
-      # @todo redirect
-      raise Errors::UnhandledResponseError.new("Unhandled HTTP Redirect", resp)
+      redirect_url = @httpcli.default_redirect_uri_callback(URI(@endpoint), resp).to_s rescue nil
+      return raise Errors::UnhandledResponseError.new("Unhandled HTTP Redirect", resp) unless redirect_url
+
+      response = @httpcli.get(redirect_url)
+      response.kind_of?(HTTP::Message) ? check_response(response) : response
     when 401
       raise Errors::UnauthorizedResponseError.new("Unauthorized request", resp)
     when 500
